@@ -1,4 +1,7 @@
-#this is for HPC cluster
+"""
+This is the r code for running gender analysis for my thesis on NYU's HPC cluster.
+The package being used to extract gender motifs here is semgram by Oscar Stuhler(see https://github.com/omstuhler/semgram for more details.)
+
 
 
 library(reticulate)
@@ -17,14 +20,11 @@ library(tm)
 task_id <- Sys.getenv("SLURM_ARRAY_TASK_ID")
 task_id <- as.integer(task_id)
 
-
-## modify this to the corresponding file
-#file_name <- sprintf("/scratch/jy3440/MOTIFS/test_chunks/test_corpus_chunk_%02d.csv", task_id)
 file_name <- sprintf("/scratch/jy3440/MOTIFS/corpus_chunks/corpus_chunk_%02d.csv", task_id)
 
-#Initialize spacy
 spacy_initialize()
 
+# format input corpus 
 formatting_text <- function(text) {
   # replace normal "" pairs first
   text <- gsub('""(.*?)""', '"\\1"', text)
@@ -44,7 +44,7 @@ formatting_text <- function(text) {
 process_books <- function(text) {
   chunk_size_limit <- 1000000  # set the chunk size limit
   
-  # initialize an empty list to store chunks.
+  # initialize an empty list to store chunks
   chunks <- list()
   
   # function to add chunk ensuring it doesn't exceed the spacy limit.
@@ -73,7 +73,7 @@ process_books <- function(text) {
     chunks <- list(text)
   }
   
-  # iniitialize an empty list to store results from each chunk.
+  # Initialize an empty list to store results from each chunk.
   result <- list()
   error_log <- list()  # To record any errors encountered
   
@@ -92,7 +92,7 @@ process_books <- function(text) {
     })
   }
   
-  # combine all motifs data frames from each chunk.
+  # combine all motifs and data frames from each chunk.
   # initialize an empty list for each category
   combined_actions <- list()
   combined_treatments <- list()
@@ -101,7 +101,7 @@ process_books <- function(text) {
   combined_agent_treatments <- list()
   combined_action_patients <- list()
   
-  # loop thru each category of each chunk in the chunk list and combine using do.call with rbind
+  # loop thru each category of each chunk in the chunk list and combine 
   for (i in seq_along(result)) {
     combined_actions[[i]] <- result[[i]]$actions
     combined_treatments[[i]] <- result[[i]]$treatments
@@ -119,7 +119,7 @@ process_books <- function(text) {
   final_agent_treatments <- do.call(rbind, combined_agent_treatments)
   final_action_patients <- do.call(rbind, combined_action_patients)
   
-  # write final list of combined data frames
+  # write the final list of combined data frames
   final_combined_list <- list(
     actions = final_actions,
     treatments = final_treatments,
@@ -128,54 +128,50 @@ process_books <- function(text) {
     agent_treatments = final_agent_treatments,
     action_patients = final_action_patients
   )
-  
-  # return combined results.
+
+# print once so I can monitor the progress in the .out files
   print("motifs for one work extracted")
   return(final_combined_list)
-  
-
 }
 
-
-# set chunk load-in
+# set chunk size
 start_row <- 0
 chunk_size <- 1000
 total_rows <- 5000
 subchunk <- 0
 
-# Process each chunk
-# Process each chunk
+# codes for processing each chunk
 while (start_row < total_rows) {
   # Read a chunk of data
   corpus_chunk <- fread(file_name, skip = start_row, nrows = chunk_size)
   print("Reading one subchunk done.")
 
-  # Apply formatting text function to each 'body' that is not NA and not empty
+  # format one corpus chunk
   corpus_chunk[!is.na(body) & body != '', body := lapply(.SD, formatting_text), .SDcols = "body"]
   print("Formatting done for one corpus chunk.")
 
-  # Apply motif extraction to each 'body' that is not NA and not empty
+  # apply motif extraction
   corpus_chunk[, motif := ifelse(!is.na(body) & body != '', lapply(body, process_books), '')]
   print("Motif extraction done for one corpus chunk.")
 
-  # Print memory usage before writing JSON
+  # monitor memory usage before writing JSON
   print(paste("Memory usage before writing JSON:", pryr::mem_used()))
 
-  # Construct the output filename and write to JSON
+  # construct the output filename and write to JSON
   output_name <- sprintf("corpus_chunks_results/motifs_%02d_%02d.json", as.integer(task_id), subchunk)
   write_json(corpus_chunk, output_name)
   
-  # Print memory usage after writing JSON
+  # print memory usage after writing JSON
   print(paste("Memory usage after writing JSON:", pryr::mem_used()))
 
-  # Remove the chunk from memory and perform garbage collection
+  # explicitly remove the chunk from memory and perform garbage collection
   rm(corpus_chunk)
   gc()
 
-  # Print memory usage after garbage collection
+  # monitor memory again
   print(paste("Memory usage after gc():", pryr::mem_used()))
 
-  # Update the starting row and subchunk index for the next iteration
+  # update the starting row and subchunk index for the next iteration
   start_row <- start_row + chunk_size
   subchunk <- subchunk + 1
   cat(sprintf("Processed up to row %d\n", start_row))
