@@ -1,8 +1,7 @@
 """
 This is the r code for running gender analysis for my thesis on NYU's HPC cluster.
 The package being used to extract gender motifs here is semgram by Oscar Stuhler(see https://github.com/omstuhler/semgram for more details.)
-
-
+"""
 
 library(reticulate)
 Sys.unsetenv("RETICULATE_PYTHON") 
