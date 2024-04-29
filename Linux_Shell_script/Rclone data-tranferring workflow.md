@@ -2,8 +2,6 @@
 
 #computational_text_analysis #python 
 
-NYU HPC tutorial: (this is generally, if not entirely, useless)
-https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/hpc-storage/data-management/data-transfers/transferring-cloud-storage-data-with-rclone
 # 1.  Setting up 
 -  SSH into HPC first 
 - Load rclone module
