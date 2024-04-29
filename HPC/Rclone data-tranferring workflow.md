@@ -1,4 +1,4 @@
-# My own tutorial for rclone data transfer workflow between HPC and remote(google drive)
+# Tutorial for rclone data transfer workflow between HPC and remote(google drive)
 
 #computational_text_analysis #python 
 
