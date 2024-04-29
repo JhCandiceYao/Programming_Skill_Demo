@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block container %}
+
+<section>
+<!--    Insert h2 element with today's date-->
+    <h2>Today is {{ date }}</h2>
+    <div id="events">
+<!--    Insert for loop to iterate through dictionary and display events-->
+        {% for key, value in schedule.items() %}
+            <p>{{ key }}</p>
+            <p>{{ value }}</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

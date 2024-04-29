@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<main>
+    <section id="catLeft">
+        <!-- This for loop assumes that you are passing in a list of category rows, retrieved from the database -->
+        {% for category in categories %}
+            <!-- Insert an if statement to check if the selectedCategory parameter is the same as the categoryId> -->
+            <!-- If so, use class='selectedCategory' to style the category
+                     This should be a p element with the category name -->
+            {% if category[0] == selectedCategory %}
+                <p class='selectedCategory'>{{ category[1]  }}
+                </p>
+            <!-- Otherwise, use class='notSelectedCategory' to style the category -->
+            <!-- This should be a p element containing a link to the category page, containing the corresponding category -->
+            {% else %}
+                <p class='notSelectedCategory'>
+                    <a href="{{ url_for('category', categoryId=category[0]) }}">{{ category[1] }}</a>
+                </p>
+            {% endif %}
+        {%endfor%}
+    </section>
+    <section id="catRight">
+        <!-- This for loop assumes that you are passing in a list of book rows, retrieved from the database -->
+        {% for book in books %}
+                <div class='book'>
+                    <!-- Insert the book image stored in the static folder and the book as the alt text -->
+                    <div><img src="{{ url_for('static', filename='images/books/' + book[5] + '.jpg') }}" alt='book[2]' width="250"/> </div>
+                    <div class='bookDetailBox'>
+                        <!-- Insert the corresponding field into each of the following rows -->
+                        <p class='bookTitle'>{{  book[2]  }}</p>
+                        <p class='bookDetail'>by {{  book[3]  }}</p>
+                        <p class='bookPrice'>{{  book[4]  }}</p>
+                            <a class='actionButton' href='#'>Add to cart</a>
+                        <!-- Insert the if statement such that if the ReadNow flag is set include the Read Now button-->
+                            {% if book.readNow %}
+                                <a class='actionButton' href='#'>Read Now</a>
+                            {% endif %}
+                    </div>
+                </div>
+            {%endfor%}
+
+    </section>
+</main>
+{% endblock %}
+

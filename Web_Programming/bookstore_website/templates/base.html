@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Social Shelf</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  </head>
+  <body>
+    <header>
+      <div id="leftHeader">
+        <a href="{{ url_for('home')}}">
+            <img src="{{ url_for('static', filename='images/misc/the-social-shelf-logo.png') }}" alt="Logo" width="230" height="230">
+        </a>
+          <span class="siteTitle">The Social Shelf</span>
+      </div>
+      <div id="midHeader">
+        <form id='searchBoxForm' action="#" method="post">
+        <input id='searchBox' type='text' placeholder='Book Title Search' name="search">
+        <input id="searchIcon" type="image" src="static/images/misc/search-icon.png" alt="search icon">
+        </form>
+        <div class="dropdown">
+            <p class="dropdownSelect">Choose a field to dive into! </p>
+            <div class="dropdownContent">
+               <!-- This for loop assumes that you are passing in a list of category rows, retrieved from the database -->
+               {% for category in categories %}
+                   <!-- Insert a p element that contains a link with the categoryid as a GET parameter
+                   The category name should be what is displayed
+                   The general format should be
+                   <p><a href="url with category Id parameter">category name</a></p>          -->
+                    <p><a href="{{ url_for('category', categoryId=category[0]) }}">{{ category[1] }}</a></p>
+
+
+              {%endfor%}
+            </div>
+        </div>
+      </div>
+      <div id="rightHeader">
+        <div id="cartIcon"><a href="#">
+                <img src="static/images/misc/cart-icon.webp" alt="shopping cart icon" width = 35 height =35></a>
+        </div>
+        <div id='cartCount'>1 item</div>
+        <div class='loginButton'><a href='#'>login</a></div>
+
+      </div>
+  </header>
+    <main>{% block container %} {% endblock %}</main>
+  <footer>
+    <div id="footerLeft">
+      <!-- Insert the name of your site here-->
+      <p>&copy;CandiceYao</p>
+        <a href="#">Contact Us</a>
+        <a href="#">Directions</a>
+    </div>
+    <div id="footerRight">
+        <a href="#"><img src ="static/images/misc/facebook-icon.webp" alt="Facebook" height=35 width=35></a>
+        <a href="#"><img src ="static/images/misc/twitter-icon.jpg" alt ="Twitter" height=35 width=35></a>
+    </div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,349 @@
+/* Styles used on multiple pages */
+
+body {
+    max-width: 1160px;
+    font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', serif;
+    font-size: 1em
+    /*font: 1em normal Arial, sans-serif;*/
+    color: #111111;
+}
+/* rules for the header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+/* rules for the center header */
+#searchBoxForm {
+    margin-top: 30px;
+    display: flex;
+}
+#searchBox {
+    height: 20px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+.dropdownSelect {
+    width: 195px;
+    padding: 5px;
+    background-color: #4C3F48;
+    color: white;
+    position: relative;
+    top:10px;
+    left: -24px;
+    text-align: center;
+    display: block;
+    border-radius: 8px;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    min-width: 200px;
+    padding-top: 5px;
+    z-index: 1;
+    border-radius: 5px;
+    background-color: #4C3F48;
+    text-align: center;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+.dropdownContent a {
+    color: white;
+    text-decoration: none;
+}
+
+.dropdownContent a:hover {
+    color: pink;
+    text-decoration: none;
+}
+
+/* rules for the right header */
+
+#rightHeader {
+    display: flex;
+    margin-top: 40px;
+}
+
+#cartCount{
+    width: 150px;
+    margin: 8px 0 0 10px;
+}
+
+.loginButton {
+    background-color: #4C3F48;
+    width: 50px;
+    height: 30px;
+    margin: 4px auto 0 auto;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 8px;
+}
+
+.loginButton a{
+    color: white;
+    text-decoration: none;
+}
+.loginButton a:hover {
+    color: #fff9fc;
+    text-decoration: none;
+}
+
+/* rules for the footer */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin-left: 10px;
+    padding: 15px 0;
+    font-size: 0.8em;
+}
+
+#footerLeft {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0 0 10px;
+    width: 300px;
+}
+
+#footerLeft a{
+    padding-top: 12px;
+}
+
+#footerRight {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 50px;
+    width: 80px;
+}
+
+#notFoundMessage {
+    color: red;
+}
+
+.commandButton {
+    height: 30px;
+    width: 150px;
+    border-radius: 8px;
+    margin: 20px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #4C3F48;
+    font-size: smaller;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+
+.submitButton {
+    height: 18px;
+    border-radius: 8px;
+    border: none;
+    margin: 6px 0 0 4px;
+    text-align: center;
+    background-color: #4C3F48;
+    color: white;
+    font-size: 0.875em;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    margin: 5px 0 0 10px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+h1{
+    font-size: 1.8em;
+    font-family:'papyrus';
+    font-weight: 700;
+}
+
+/* Styles only used on the index page */
+/* Styles used on the left hand Welcome text section */
+#mainLeft {
+    width: 550px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: black;
+    background-color: #DDB8C5;
+}
+
+#mainLeft p{
+    font-size: 120%;
+}
+
+.welcomeText {
+    font-family: 'papyrus';
+    max-width: 400px;
+}
+
+/* Styles used on the right hand Category section */
+#mainRight {
+    max-width: 600px;
+    border-left: 1px solid black;
+    padding: 20px 0;
+    background-color: white;
+    text-align: center;
+}
+
+.heading-box {
+    border: 2px solid #DDB8C5;
+    border-radius: 15px;
+    padding: 3px;
+    display: inline-block;
+    max-width: 300px;
+}
+
+.shop-heading {
+    color: #333;
+    text-align: center;
+}
+
+#categorySelections {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category {
+    width: 299px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 40px;
+    color: #4C3F48;
+    font-weight: bold;
+
+}
+
+.category a{
+    text-decoration:underline dotted ;
+}
+
+
+/* Styles used on the category page */
+/* Styles used for the left hand navigation section */
+
+#catLeft {
+    width: 500px;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.notSelectedCategory {
+    height: 30px;
+    width: 150px;
+    border-radius: 8px;
+    margin: 20px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #4C3F48;
+}
+
+.notSelectedCategory a{
+
+    color: white;
+    font-size: smaller;
+    text-decoration: none;
+}
+
+.selectedCategory {
+    height: 30px;
+    width: 150px;
+    border: 1px solid #4C3F48;
+    border-radius: 8px;
+    margin: 20px;
+    text-align: center;
+    line-height: 30px;
+    color: #4C3F48;
+    font-size: smaller;
+    background-color:#EED9E7;
+}
+
+/* styles for the righthand section that shows all the books */
+
+#catRight {
+    padding: 20px 0 20px 30px;
+    /*box-shadow: inset 0 0 0 20px white;*/
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.book {
+    width: 350px;
+    margin: 30px;
+    display: flex;
+    background-color: #DDB8C5;
+}
+
+.bookDetailBox {
+    margin: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875em;
+}
+
+.bookTitle {
+    font-weight: bold;
+}
+
+.bookDetail {
+    margin-top: 4px;
+    font-size: 0.875em;
+}
+
+.bookPrice {
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+.actionButton {
+    height: 20px;
+    width: 70px;
+    border-radius: 8px;
+    margin-top: 4px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #4C3F48;
+    color: white;
+    font-size: 0.875em;
+    text-decoration: none;
+}
+
+#leftHeader
+.siteTitle {
+  font-family: 'Papyrus';
+  font-size: 4em;
+  font-weight: bold;
+  color: #331323;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  position: absolute;
+  top: 80px;
+  left: 250px;
+  background-color: #DDB8C5;
+  border-radius: 5px;
+
+}

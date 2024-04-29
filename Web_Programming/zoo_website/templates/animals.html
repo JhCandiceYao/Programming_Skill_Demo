@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block container %}
+<table>
+    <tr>
+        <th>Animal</th>
+        <th>Size</th>
+        <th>Color</th>
+        <th>Picture</th>
+    </tr>
+    {% for animal in animals %}
+        <tr>
+            {% for field in animal %}
+            <td>{{ field }} </td>
+            {% endfor %}
+            <td><img height = 100 width = 100 src = "static/images/{{animal[0]}}.png" alt = "{{animal[0]}}"> </td>
+        </tr>
+    {% endfor %}
+<!--Insert for loop to iterate through list of tuples to populate table with animals-->
+</table>
+{% endblock %}
